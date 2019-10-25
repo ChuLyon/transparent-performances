@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+cd api
+
+mvn clean package
+
+java -cp target/api-1.0-SNAPSHOT.jar com.lamsade.App
