@@ -72,30 +72,36 @@ public class App
             catch(Exception e){
                 LOG.error(e);
             }
-			
+
+
             // Set datasets to use
             HashMap<String, MultiLabelInstances> datasets = new HashMap<>();
-            String[] dataset_names = {
-                "emotions", // 72 numerical attributes and 6 labels
-                "CAL500", // 68 numerical attributes and 174 labels
+	    datasets.put("emotions", new MultiLabelInstances("../data/emotions.arff", 6)); // 72 numerical attributes and 6 labels
+	    
+	    /*
+	    String[][] dataset_names = {
+	      {"emotions", 6},// 72 numerical attributes and 6 labels
+                //"CAL500", // 68 numerical attributes and 174 labels
                 //"scene", // 294 numerical attributes and 6 labels
-                "genbase", // 1186 nominal attributes and 27 labels
+                //"genbase", // 1186 nominal attributes and 27 labels
                 //"bibtex", // 1836 nominal attributes and 159 labels
-                "birds", // 2 nominal and 258 numerical attributes and 19 labels
+                //"birds", // 2 nominal and 258 numerical attributes and 19 labels
                 //"medical", // 1449 nominal attributes and 45 labels
-                "flags", // 9 nominal and 10 numeric attributes and 7 labels
+                //"flags", // 9 nominal and 10 numeric attributes and 7 labels
                // "consultations" // 2 nominal and 2 numeric attributes and 15 labels
             };
             
-            for(String dataset_name : dataset_names){
+            for(String[] dataset_name : dataset_names){
                 datasets.put(
-                    dataset_name,
+                    dataset_name[0],
                     new MultiLabelInstances(
-                            "../data/"+dataset_name+".arff", 
-                            "../data/"+dataset_name+".xml"
+                            "../data/"+dataset_name[0]+".arff", 
+                            dataset_name[1]
                         )
                 );
             }
+	    */
+	    
 				
 					
             // Setup output
@@ -110,7 +116,7 @@ public class App
                 };
 			
 			
-			
+	    		
             // Init ouput file
             File f = new File(outFilename);
             if(!f.exists())
@@ -127,7 +133,7 @@ public class App
                         ;
             output += "\n";
 
-            PrintWriter writer = new PrintWriter(f.getPath(), "UTF-8");
+	    PrintWriter writer = new PrintWriter(f.getPath(), "UTF-8");
             writer.print(output);
             writer.flush();
             output = "";

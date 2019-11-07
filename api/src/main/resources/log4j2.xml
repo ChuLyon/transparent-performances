@@ -5,7 +5,7 @@
     </Properties>
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %highlight{%-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red bold, ERROR=red, WARN=yellow, INFO=black, DEBUG=blue, TRACE=gray}" disableAnsi="false"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %highlight{%-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red bold, ERROR=red, WARN=yellow, INFO=white, DEBUG=blue, TRACE=gray}" disableAnsi="false"/>
         </Console>
     </Appenders>
     <Loggers>
