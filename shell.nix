@@ -8,6 +8,7 @@ let
     # rmarkdown related packages
     knitr
     rmarkdown
+    ggplot2
     # Rstudio related packages
     # servr
   ];

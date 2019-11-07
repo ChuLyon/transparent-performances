@@ -1,0 +1,73 @@
+---
+title: "Transparency vs Performances"
+output:
+  html_document:
+  toc: true
+  code_folding: "hide"
+bibliography: bibliography.bib
+---
+
+```{r include=FALSE}
+library(ggplot2)
+```
+
+# Motivations
+
+In these experiments we aimed to observe
+variations of performances
+of different multi-label classification 
+algorithms, 
+according to their degree of transparency.
+
+These experiments was made using
+the Mulan Java Library, developped by @tsoumakas2011mulan,
+which contains plethora of classification algorithms,
+but also tools to evaluate them.
+
+# Performances
+
+```{r loadCsv}
+results <- read.csv("results/crossvalidation.csv", sep=";")
+```
+
+## Hamming Loss
+
+According to @schapire2000, Hamming Loss of a
+classifier $H$ on a dataset $D$ is defined as follow :
+
+$$HammingLoss(H,D) = \frac{1}{|D|}\sum_{i=1}^{|D|}\frac{Y_i \Delta Z_i}{|L|}$$
+
+Where $\Delta$ is corresponding to symmetric difference of
+two sets of labels (equivalent to XOR operator).
+
+The hamming loss is corresponding to the mean of errors by labels.
+
+```{r hammingLoss}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Hamming_Loss,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Hamming_Loss - Hamming_Loss_std,
+    ymax=Hamming_Loss + Hamming_Loss_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Hamming loss of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+# References
+

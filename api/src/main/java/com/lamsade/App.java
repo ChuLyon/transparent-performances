@@ -157,7 +157,7 @@ public class App
                 // Init Learners
                 HashMap<String, MultiLabelLearnerBase> learners = new HashMap<>();
 
-                learners.put("FuzzyBayes", new FuzzyBayes());
+                //learners.put("FuzzyBayes", new FuzzyBayes());
                 learners.put("HistBayes", new HistBayes());
                 //learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
                 //learners.put("BPMLL", new BPMLL());
