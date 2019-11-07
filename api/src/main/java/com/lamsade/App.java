@@ -157,7 +157,7 @@ public class App
                 // Init Learners
                 HashMap<String, MultiLabelLearnerBase> learners = new HashMap<>();
 
-                //learners.put("FuzzyBayes", new FuzzyBayes());
+                learners.put("FuzzyBayes", new FuzzyBayes());
                 learners.put("HistBayes", new HistBayes());
                 //learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
                 //learners.put("BPMLL", new BPMLL());
@@ -166,7 +166,7 @@ public class App
                 //learners.put("RAkEL+LMT", new RAkEL(new LabelPowerset(new LMT()))); // Decision Tree
                 //learners.put("RAkEL+Ripper", new RAkEL(new LabelPowerset(new JRip()))); // Rules
                 //learners.put("RAkEL+PART", new RAkEL(new LabelPowerset(new PART()))); // DT + Rules
-                //learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
+                learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
                 //learners.put("RAkEL+KStar", new RAkEL(new LabelPowerset(new KStar()))); // instance based
                 //learners.put("RAkEL+SMO", new RAkEL(new LabelPowerset(new SMO()))); // SVM
                 

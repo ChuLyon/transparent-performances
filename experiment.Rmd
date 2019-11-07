@@ -69,5 +69,174 @@ ggtitle("Hamming loss of multi-label classifier systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+## Precision
+
+```{r microPrecision}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Precision,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Micro.averaged_Precision - Micro.averaged_Precision_std,
+    ymax=Micro.averaged_Precision + Micro.averaged_Precision_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroPrecision}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Precision,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Macro.averaged_Precision - Macro.averaged_Precision_std,
+    ymax=Macro.averaged_Precision + Macro.averaged_Precision_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+## Recall
+
+
+```{r microRecall}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Recall,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Micro.averaged_Recall - Micro.averaged_Recall_std,
+    ymax=Micro.averaged_Recall + Micro.averaged_Recall_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroRecall}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Recall,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Macro.averaged_Recall - Macro.averaged_Recall_std,
+    ymax=Macro.averaged_Recall + Macro.averaged_Recall_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+## F-Measure
+
+```{r microFMeasure}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_F.Measure,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Micro.averaged_F.Measure - Micro.averaged_F.Measure_std,
+    ymax=Micro.averaged_F.Measure + Micro.averaged_F.Measure_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged F-Measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroFMeasure}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_F.Measure,
+    fill=Learner
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Macro.averaged_F.Measure - Macro.averaged_F.Measure_std,
+    ymax=Macro.averaged_F.Measure + Macro.averaged_F.Measure_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged F-Measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
 # References
 
