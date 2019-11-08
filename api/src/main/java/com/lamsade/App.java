@@ -77,30 +77,12 @@ public class App
             // Set datasets to use
             HashMap<String, MultiLabelInstances> datasets = new HashMap<>();
 	    datasets.put("emotions", new MultiLabelInstances("../data/emotions.arff", 6)); // 72 numerical attributes and 6 labels
-	    
-	    /*
-	    String[][] dataset_names = {
-	      {"emotions", 6},// 72 numerical attributes and 6 labels
-                //"CAL500", // 68 numerical attributes and 174 labels
-                //"scene", // 294 numerical attributes and 6 labels
-                //"genbase", // 1186 nominal attributes and 27 labels
-                //"bibtex", // 1836 nominal attributes and 159 labels
-                //"birds", // 2 nominal and 258 numerical attributes and 19 labels
-                //"medical", // 1449 nominal attributes and 45 labels
-                //"flags", // 9 nominal and 10 numeric attributes and 7 labels
-               // "consultations" // 2 nominal and 2 numeric attributes and 15 labels
-            };
-            
-            for(String[] dataset_name : dataset_names){
-                datasets.put(
-                    dataset_name[0],
-                    new MultiLabelInstances(
-                            "../data/"+dataset_name[0]+".arff", 
-                            dataset_name[1]
-                        )
-                );
-            }
-	    */
+            datasets.put("CAL500", new MultiLabelInstances("../data/CAL500.arff", 174)); // 68 numerical attributes and 174 labels
+            datasets.put("scene", new MultiLabelInstances("../data/scene.arff", 6)); // 294 numerical attributes and 6 labels
+            datasets.put("genbase", new MultiLabelInstances("../data/genbase.arff", 27)); // 1186 nominal attributes and 27 labels
+	    datasets.put("birds", new MultiLabelInstances("../data/birds.arff", 19)); // 2 nominal and 258 numerical attributes and 19 labels
+	    datasets.put("medical", new MultiLabelInstances("../data/medical.arff", 45)); // 1449 nominal attributes and 45 labels
+            datasets.put("flags", new MultiLabelInstances("../data/flags.arff", 7)); // 9 nominal and 10 numeric attributes and 7 labels
 	    
 				
 					
@@ -156,17 +138,20 @@ public class App
 
                 // Init Learners
                 HashMap<String, MultiLabelLearnerBase> learners = new HashMap<>();
-
-                learners.put("FuzzyBayes", new FuzzyBayes());
-                learners.put("HistBayes", new HistBayes());
-                //learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
-                //learners.put("BPMLL", new BPMLL());
-                
-                //learners.put("RAkEL+C4.5", new RAkEL(new LabelPowerset(new J48()))); // Decision Tree
-                //learners.put("RAkEL+LMT", new RAkEL(new LabelPowerset(new LMT()))); // Decision Tree
+                //learners.put("FuzzyBayes", new FuzzyBayes());
+                //learners.put("HistBayes", new HistBayes()); 
+                //learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
+		//learners.put("RAkEL+C4.5", new RAkEL(new LabelPowerset(new J48()))); // Decision Tree
                 //learners.put("RAkEL+Ripper", new RAkEL(new LabelPowerset(new JRip()))); // Rules
+
+		//learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
+                learners.put("BPMLL", new BPMLL()); // neural network
+                
+
+                //learners.put("RAkEL+LMT", new RAkEL(new LabelPowerset(new LMT()))); // Decision Tree
+
                 //learners.put("RAkEL+PART", new RAkEL(new LabelPowerset(new PART()))); // DT + Rules
-                learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
+
                 //learners.put("RAkEL+KStar", new RAkEL(new LabelPowerset(new KStar()))); // instance based
                 //learners.put("RAkEL+SMO", new RAkEL(new LabelPowerset(new SMO()))); // SVM
                 

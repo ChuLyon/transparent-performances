@@ -49,7 +49,7 @@ target/
 # temporary files
 tmp/
 results/
-
+experiment_files/
 
 # Rmarkdown
 .Rproj.user
