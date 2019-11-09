@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import mulan.classifier.MultiLabelLearnerBase;
 import mulan.classifier.meta.RAkEL;
+import mulan.classifier.neural.BPMLL;
+import mulan.classifier.lazy.MLkNN;
 import mulan.classifier.transformation.LabelPowerset;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +36,7 @@ import mulan.evaluation.MultipleEvaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.rules.JRip;
 import weka.classifiers.trees.J48;
+import weka.classifiers.functions.SMO;
 import weka.core.Utils;
 
 /**
@@ -138,23 +141,14 @@ public class App
 
                 // Init Learners
                 HashMap<String, MultiLabelLearnerBase> learners = new HashMap<>();
-                //learners.put("FuzzyBayes", new FuzzyBayes());
-                //learners.put("HistBayes", new HistBayes()); 
-                //learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
-		//learners.put("RAkEL+C4.5", new RAkEL(new LabelPowerset(new J48()))); // Decision Tree
-                //learners.put("RAkEL+Ripper", new RAkEL(new LabelPowerset(new JRip()))); // Rules
-
-		//learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
+                learners.put("FuzzyBayes", new FuzzyBayes());
+                learners.put("HistBayes", new HistBayes()); 
+                learners.put("RAkEL+NaiveBayes", new RAkEL(new LabelPowerset(new NaiveBayes()))); // Bayes Net
+		learners.put("RAkEL+C4.5", new RAkEL(new LabelPowerset(new J48()))); // Decision Tree
+                learners.put("RAkEL+Ripper", new RAkEL(new LabelPowerset(new JRip()))); // Rules
                 learners.put("BPMLL", new BPMLL()); // neural network
-                
-
-                //learners.put("RAkEL+LMT", new RAkEL(new LabelPowerset(new LMT()))); // Decision Tree
-
-                //learners.put("RAkEL+PART", new RAkEL(new LabelPowerset(new PART()))); // DT + Rules
-
-                //learners.put("RAkEL+KStar", new RAkEL(new LabelPowerset(new KStar()))); // instance based
-                //learners.put("RAkEL+SMO", new RAkEL(new LabelPowerset(new SMO()))); // SVM
-                
+		learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
+		learners.put("RAkEL", new RAkEL(new LabelPowerset(new SMO()))); // SVM
 
 
                 // For each selected learner
