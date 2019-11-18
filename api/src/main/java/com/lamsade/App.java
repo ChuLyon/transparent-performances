@@ -86,6 +86,8 @@ public class App
 	    datasets.put("birds", new MultiLabelInstances("../data/birds.arff", 19)); // 2 nominal and 258 numerical attributes and 19 labels
 	    datasets.put("medical", new MultiLabelInstances("../data/medical.arff", 45)); // 1449 nominal attributes and 45 labels
             datasets.put("flags", new MultiLabelInstances("../data/flags.arff", 7)); // 9 nominal and 10 numeric attributes and 7 labels
+        datasets.put("consultations", new MultiLabelInstances("../data/consultations.arff", 18)); // 2 nominal and 2 numeric attributes and 18 labels
+        
 	    
 				
 					
