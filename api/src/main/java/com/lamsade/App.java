@@ -79,15 +79,14 @@ public class App
 
             // Set datasets to use
             HashMap<String, MultiLabelInstances> datasets = new HashMap<>();
-	    datasets.put("emotions", new MultiLabelInstances("../data/emotions.arff", 6)); // 72 numerical attributes and 6 labels
+            datasets.put("emotions", new MultiLabelInstances("../data/emotions.arff", 6)); // 72 numerical attributes and 6 labels
             datasets.put("CAL500", new MultiLabelInstances("../data/CAL500.arff", 174)); // 68 numerical attributes and 174 labels
             datasets.put("scene", new MultiLabelInstances("../data/scene.arff", 6)); // 294 numerical attributes and 6 labels
             datasets.put("genbase", new MultiLabelInstances("../data/genbase.arff", 27)); // 1186 nominal attributes and 27 labels
 	    datasets.put("birds", new MultiLabelInstances("../data/birds.arff", 19)); // 2 nominal and 258 numerical attributes and 19 labels
 	    datasets.put("medical", new MultiLabelInstances("../data/medical.arff", 45)); // 1449 nominal attributes and 45 labels
             datasets.put("flags", new MultiLabelInstances("../data/flags.arff", 7)); // 9 nominal and 10 numeric attributes and 7 labels
-        datasets.put("consultations", new MultiLabelInstances("../data/consultations.arff", 18)); // 2 nominal and 2 numeric attributes and 18 labels
-        
+            datasets.put("consultations", new MultiLabelInstances("../data/consultations.arff", 18)); // 2 nominal and 2 numeric attributes and 18 labels
 	    
 				
 					
@@ -150,7 +149,7 @@ public class App
                 learners.put("RAkEL+Ripper", new RAkEL(new LabelPowerset(new JRip()))); // Rules
                 learners.put("BPMLL", new BPMLL()); // neural network
 		learners.put("MLkNN", new MLkNN()); // k-Nearest Neighboors
-		learners.put("RAkEL", new RAkEL(new LabelPowerset(new SMO()))); // SVM
+		learners.put("RAkEL+SMO", new RAkEL(new LabelPowerset(new SMO()))); // SVM
 
 
                 // For each selected learner
