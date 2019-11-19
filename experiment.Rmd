@@ -2,12 +2,12 @@
 title: "Transparency vs Performances"
 output:
   html_document:
-  toc: true
-  code_folding: "hide"
+    toc: true
+    code_folding: "hide"
 bibliography: bibliography.bib
 ---
 
-```{r include=FALSE}
+```{r setup, include=FALSE}
 library(ggplot2)
 ```
 
@@ -69,7 +69,39 @@ ggtitle("Hamming loss of multi-label classifier systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r hammingLossBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Hamming_Loss
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Hamming loss of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r hammingLossLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Hamming_Loss
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Hamming loss of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
 ## Precision
+
+### Micro-averaged
 
 ```{r microPrecision}
 ggplot(
@@ -98,6 +130,38 @@ ggtitle("Micro-averaged precision of multi-label classifier systems by dataset")
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r microPrecisionBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Precision
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged Precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r microPrecisionLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Micro.averaged_Precision
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged Precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+### Macro-averaged
+
 ```{r macroPrecision}
 ggplot(
   results,
@@ -125,8 +189,39 @@ ggtitle("Macro-averaged precision of multi-label classifier systems by dataset")
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r macroPrecisionBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Precision
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged Precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroPrecisionLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Macro.averaged_Precision
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged Precision of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
 ## Recall
 
+### Micro-averaged
 
 ```{r microRecall}
 ggplot(
@@ -155,6 +250,38 @@ ggtitle("Micro-averaged recall of multi-label classifier systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r microRecallBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Recall
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged Recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r microRecallLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Micro.averaged_Recall
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged Recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+### Macro-averaged
+
 ```{r macroRecall}
 ggplot(
   results,
@@ -182,7 +309,39 @@ ggtitle("Macro-averaged recall of multi-label classifier systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r macroRecallBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Recall
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged Recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroRecallLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Macro.averaged_Recall
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged Recall of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
 ## F-Measure
+
+### Micro-averaged
 
 ```{r microFMeasure}
 ggplot(
@@ -211,6 +370,38 @@ ggtitle("Micro-averaged F-Measure of multi-label classifier systems by dataset")
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
+```{r microFBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_F.Measure
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged F-measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r microFLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Micro.averaged_F.Measure
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Micro-averaged F-measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+### Macro-averaged
+
 ```{r macroFMeasure}
 ggplot(
   results,
@@ -235,6 +426,36 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ggtitle("Macro-averaged F-Measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroFBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_F.Measure
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged F-measure of multi-label classifier systems by dataset") +
+theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+```
+
+```{r macroFLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=Learner,
+    y=Macro.averaged_F.Measure
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+ggtitle("Macro-averaged F-measure of multi-label classifier systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
 
