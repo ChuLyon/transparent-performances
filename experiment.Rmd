@@ -9,6 +9,8 @@ bibliography: bibliography.bib
 
 ```{r setup, include=FALSE}
 library(ggplot2)
+library(RColorBrewer)
+cbPalette <- rev(brewer.pal(8,"RdYlGn"))
 ```
 
 # Motivations
@@ -457,9 +459,11 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=factor(Learner,levels = c("HistBayes","RAkEL+NaiveBayes","RAkEL+C4.5","RAkEL+Ripper","FuzzyBayes","MLkNN","RAkEL+SMO","BPMLL")))) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ggtitle("Distribution of macro-averaged F-measures of different multi-label classification systems by dataset") +
 theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
 ```
