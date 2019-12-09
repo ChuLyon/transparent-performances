@@ -9,6 +9,7 @@ let
     knitr
     rmarkdown
     ggplot2
+    RColorBrewer
     # Rstudio related packages
     # servr
   ];
@@ -18,6 +19,7 @@ pkgs.mkShell {
   buildInputs = [
     # R packages
     pkgs.pandoc
+    pkgs.haskellPackages.pandoc-citeproc
     (pkgs.rWrapper.override {
       packages = r_pkgs;
     })

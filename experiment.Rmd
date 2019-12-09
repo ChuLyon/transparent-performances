@@ -26,10 +26,232 @@ the Mulan Java Library, developped by @tsoumakas2011mulan,
 which contains plethora of classification algorithms,
 but also tools to evaluate them.
 
+# Classification systems
+
+## BPMLL
+
+Implementation of Back-Propagation Multi-Label Learning,
+based on the work of @zhang2006.
+
+BPMLL is based on neural network.
+
+According to our criteria of "transparency", BPMLL is the less "transparent"
+classification system evaluated.
+
+## MLkNN
+
+Implementation of the Multi-Label k-Nearest Neighbours
+algorith, based on the work of @zhang2007.
+
+MLkNN is based on k-Nearest Neighbours clustering algorithm and
+co-occurences probabilities.
+
+According to our criteria of "transparency", MLkNN is the third less
+"transparent" classification system evaluated.
+
+## RAkEL
+
+Implementation of the RAndom k-labELsets alogrithm,
+based on the work of @tsoumakas2011rakel.
+
+RAkEL is a multilabel classifier using other classifier
+designed for simple classification problem.
+
+### C4.5
+
+Implementation of the C4.5 algorithm, based on the
+work of @quinlan1993.
+
+C4.5 is based on decision trees and shannon's entropy.
+
+According to our criteria of "transparency", C4.5 is the third
+most "transparent" classification system evaluated.
+
+### Naive Bayes
+
+Implementation of a Naive Bayes classification algorithm,
+based on the work of @john1995.
+
+Naive Bayes is based on probalities and the bayes theorem.
+
+According to our criteria of "transparency", Naive Bayes 
+with RAkEL is the second most "transparent" classification system evaluated.
+
+### RIPPER
+
+Implementation of Repeated Incremental Pruning 
+to Produce Error Reduction algorithm,
+based on the work of @cohen1995.
+
+RIPPER is based on rule-based classifier and shannon's entropy.
+
+According to our criteria of "transparency", RIPPER is
+the fourth most "transparent" classification system evaluated.
+
+### SMO
+
+Implementation of sequential minimal optimization 
+algorithm for training a support vector classifier,
+based on the work of @platt1998, @hastie1998
+and @keerthi2001.
+
+SMO is based on the aggregation of several mathemical functions.
+
+According to our criteria of "transparency", SMO is
+the second less "transparent" classification system evaluated.
+
+## HistBayes
+
+A version of the Naive Bayes algorithm, proposed for this study,
+which discretize numerical variables using histograms.
+Apply the Naive Bayes algorithm for each label independently.
+
+HistBayes is based on histograms, probabilities and the bayes theorem.
+
+According to our criteria of "transparency", HistBayes is the most "transparent"
+classification system evaluated.
+
+## FuzzyBayes
+
+A version of the Naive Bayes algorithm, proposed for this study,
+which discretize numerical variables using the fuzzy c-means
+clustering algorithm proposed by @bezdek1984.
+
+FuzzyBayes is based on fuzzy sets, probabilities and the bayes theorem.
+
+According to our criteria of "transparency", FuzzyBayes is the fifth 
+most "transparent" classification system evaluated.
+
+# Datasets
+
+Here are listed datasets used for this test plan.
+
+According to @tsoumakas2007, 
+a dataset $D$ is defined as a set of instances,
+a set of attributes $X$ (nominal or numeric)
+and a set of labels $L$ (with 0 or 1 as value).
+
+A dataset consisting of $|D|$ multi-instances
+$(x_i, Y_i), i = 1..|D|$, 
+with $Y_i \subseteq L$ the set of labels equals
+to 1 for the instance $i$.
+
+Then, common attributes of a dataset are :
+
+- number of instances $|D|$
+- number of attributes $|X|$
+- number of labels $|L|$
+- label cardinality $LC(D)$
+$$LC(D) = \frac{1}{|D|}\sum_{i=1}^{|D|}|Y_i|$$
+- label density $LD(D)$
+$$LD(D) = \frac{1}{|D|}\sum_{i=1}^{|D|}\frac{|Y_i|}{|L|}$$
+
+
+## Birds
+
+Proposed by @briggs2013.
+
+Statistics :
+
+- instances : 645
+- attributes :
+    - nominal : 2
+    - numeric : 258
+- labels : 19
+- cardinality : 1.014
+- density : 0.053
+
+## CAL500
+
+Proposed by @turnbull2008.
+
+Statistics :
+
+- instances : 502
+- attributes :
+    - nominal : 0
+    - numeric : 68
+- labels : 174
+- cardinality : 26.004
+- density : 0.149 
+
+## Consultations
+
+Proposed for this experiment.
+
+Statistics:
+
+- instances : 50
+- attributes :
+    - nominal : 2
+    - numeric : 2
+- labels : 18
+- cardinality : 5.4
+- density : 0.3
+
+## Emotions
+
+Proposed by @trohidis2008.
+
+Statistics :
+
+- instances : 593
+- attributes :
+    - nominal : 0
+    - numeric : 72
+- labels : 6
+- cardinality : 1.869
+- density : 0.312 
+
+## Genbase
+
+Proposed by @diplaris2005.
+
+Statistics :
+
+- instances : 662
+- attributes :
+    - nominal : 1186
+    - numeric : 0
+- labels : 27
+- cardinality : 1.252
+- density : 0.046 
+
+## Medical
+
+Proposed by @pestian2007.
+
+Statistics :
+
+- instances : 978
+- attributes :
+    - nominal : 1449
+    - numeric : 0
+- labels : 45
+- cardinality : 1.245
+- density : 0.028 
+
+## Scene
+
+Proposed by @boutell2004.
+
+Statistics :
+
+- instances : 2407
+- attributes :
+    - nominal : 0
+    - numeric : 294
+- labels : 6
+- cardinality : 2.402
+- density : 0.4 
+
+
 # Performances
 
 ```{r loadCsv}
 results <- read.csv("results/crossvalidation.csv", sep=";")
+lessTransparent2MostTransparent <- c("BPMLL","RAkEL+SMO","MLkNN","FuzzyBayes","RAkEL+Ripper","RAkEL+C4.5","RAkEL+NaiveBayes","HistBayes")
+mostTransparent2lessTransparent <- rev(lessTransparent2MostTransparent)
 ```
 
 ## Hamming Loss
@@ -50,7 +272,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Hamming_Loss,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -68,8 +290,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ggtitle("Hamming losses of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r hammingLossBox}
@@ -81,27 +305,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
 ggtitle("Distribution of hamming losses of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r hammingLossLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Hamming_Loss
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
 ggtitle("Distribution of hamming losses by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ## Precision
@@ -114,7 +341,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Micro.averaged_Precision,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -132,8 +359,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ggtitle("Micro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r microPrecisionBox}
@@ -145,27 +374,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
 ggtitle("Distribution of micro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r microPrecisionLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Micro.averaged_Precision
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
 ggtitle("Distribution of micro-averaged precisions by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ### Macro-averaged
@@ -176,7 +408,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Macro.averaged_Precision,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -194,8 +426,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ggtitle("Macro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r macroPrecisionBox}
@@ -207,27 +441,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
 ggtitle("Distribution of macro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r macroPrecisionLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Macro.averaged_Precision
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
 ggtitle("Distribution of macro-averaged precisions by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ## Recall
@@ -240,7 +477,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Micro.averaged_Recall,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -258,8 +495,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ggtitle("Micro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r microRecallBox}
@@ -271,27 +510,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
 ggtitle("Distribution of micro-averaged recalls of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r microRecallLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Micro.averaged_Recall
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
 ggtitle("Distribution of micro-averaged recalls by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ### Macro-averaged
@@ -302,7 +544,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Macro.averaged_Recall,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -319,9 +561,11 @@ geom_errorbar(
   position = position_dodge(.9)
 ) +
 ylim(0.0,1.0) +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ylab("Macro-averaged Recall") +
 ggtitle("Macro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r macroRecallBox}
@@ -333,27 +577,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylab("Macro-averaged Recall") +
 ggtitle("Distribution of macro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r macroRecallLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Macro.averaged_Recall
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
 ylim(0.0,1.0) +
+xlab("Learner") +
 ylab("Macro-averaged Recall") +
 ggtitle("Distribution of macro-averaged recalls by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ## F-Measure
@@ -366,7 +613,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Micro.averaged_F.Measure,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -383,9 +630,11 @@ geom_errorbar(
   position = position_dodge(.9)
 ) +
 ylim(0.0,1.0) +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ylab("Micro-averaged F-Measure") +
 ggtitle("Micro-averaged F-Measure of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r microFBox}
@@ -397,27 +646,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Learner)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
+labs(color="Learner")+
+scale_colour_manual(values = cbPalette)+
 ylab("Micro-averaged F-Measure") +
-ggtitle("Distribution of micro-averaged F-measures of different multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+ggtitle("Distribution of micro-averaged F-measures of different multi-label classification systems by dataset") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r microFLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Micro.averaged_F.Measure
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
 ylim(0.0,1.0) +
+xlab("Learner") +
 ylab("Micro-averaged F-Measure") +
-ggtitle("Distribution of micro-averaged F-measures by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+ggtitle("Distribution of micro-averaged F-measures by multi-label classification systems for different dataset") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ### Macro-averaged
@@ -428,7 +680,7 @@ ggplot(
   aes(
     x=Dataset,
     y=Macro.averaged_F.Measure,
-    fill=Learner
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
   )
 ) + 
 geom_bar(
@@ -446,8 +698,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
 ggtitle("Macro-averaged F-Measure of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
 ```
 
 ```{r macroFBox}
@@ -459,29 +713,30 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=factor(Learner,levels = c("HistBayes","RAkEL+NaiveBayes","RAkEL+C4.5","RAkEL+Ripper","FuzzyBayes","MLkNN","RAkEL+SMO","BPMLL")))) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
 labs(color="Learner")+
 scale_colour_manual(values = cbPalette)+
 ggtitle("Distribution of macro-averaged F-measures of different multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ```{r macroFLearnerBox}
 ggplot(
   results,
   aes(
-    x=Learner,
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
     y=Macro.averaged_F.Measure
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=16, position=position_jitter(0.1), aes(colour=Dataset)) +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
+xlab("Learner") + 
 ggtitle("Distribution of macro-averaged F-measures by multi-label classification systems for different dataset") +
-theme(plot.title = element_text(size=14, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 # References
