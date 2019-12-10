@@ -333,7 +333,29 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ## Precision
 
+The precision rate is a well-known criterion to evaluate the performance of a classifier $H$ on a dataset $D$.
+
+For one-label classification problems the precision rate is defined as follow :
+
+$$Prec(H,D,l) = \frac{TPs(H,D,l)}{TPs(H,D,l) + FPs(H,D,l)}$$
+
+With $l \in L$ a label, $TPs$ the number of true positives of the classifier $H$ on the dataset $D$ for the label $l$
+and $FPs$ the number of false positives of the classifier $H$ on the dataset $D$ for the label $l$.
+
+The precision rate giving us the percentage of good labelisation over all labelisation made by the classifier (aka l=1).
+
+For multi-label classification problems the precision rate is generally averaged to have an overview of the precision
+of the classifier $H$ for all labels.
+
 ### Micro-averaged
+
+First, micro-averaged precision $Prec^{micro}:H \times D \rightarrow [0,1]$ which compute the precision
+of all labelisation of $H$ regardless of the label.
+
+Micro-averaged precision of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$Prec^{micro}(H,D) = \frac{\sum_{l \in L} TPs(H,D,l)}{\sum_{l \in L}(TPs(H,D,l) + FPs(H,D,l))}$$
+
 
 ```{r microPrecision}
 ggplot(
@@ -402,6 +424,11 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ### Macro-averaged
 
+Secondly, the macro-averaged precision $Prec^{macro} : H \times D \rightarrow [0,1]$, which compute the 
+mean of precision of a classifier $H$ on a dataset $D$, is defined as follow:
+
+$$Prec^{macro}(H,D) = \frac{\sum_{l \in L} Prec(H,D,l)}{|L|}$$
+
 ```{r macroPrecision}
 ggplot(
   results,
@@ -469,7 +496,23 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ## Recall
 
+The precision rate is generally associated to another performance rate: the recall, noted 
+$Recall: H \times D \times l \rightarrow [0,1]$..
+
+For one-label classification problems, the recall of a classifier $H$ on a dataset $D$ is
+defined as follow:
+
+$$Recall(H,D,l) = \frac{TPs(H,D,l)}{TPs(H,D,l) + FNs(H,D,l)}$$
+
+With $l \in L$ a label, $TPs$ the number of true positives of classifier $H$ on a dataset $D$ for a label $l$ 
+and $FNs$ the number of false negatives of classifier $H$ on a dataset $D$ for a label $l$.
+
 ### Micro-averaged
+
+The micro-averaged recall of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$Recall^{micro}(H,D) = \frac{\sum_{l \in L} TPs(H,D,l)}{\sum_{l \in L}(TPs(H,D,l) + FNs(H,D,l))}$$
+
 
 ```{r microRecall}
 ggplot(
@@ -538,6 +581,10 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ### Macro-averaged
 
+The macro-averaged recall of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$Recall^{macro}(H,D) = \frac{\sum_{l \in L} Recall(H,D,l)}{|L|}$$
+
 ```{r macroRecall}
 ggplot(
   results,
@@ -605,7 +652,21 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ## F-Measure
 
+Lastly, to have an overview the performances of a classifier a harmonic mean of precision and recall,
+also called F-measure, is made.
+
+For one-label classification problems, the F-measure of a classifier $H$ on a label $l$
+of a dataset $D$ is defined as follow:
+
+$$F(H,D,l) = \frac{Prec(H,D,l) \times Recall(H,D,l)}{Prec(H,D,l) + Recall(H,D,l)}$$
+
+For multi-label classification problems, the F-measure is computed for micro and macro averaged rates.
+
 ### Micro-averaged
+
+The micro-averaged F-measure of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$F^{micro}(H,D) = \frac{Prec^{micro}(H,D) \times Recall^{micro}(H,D)}{Prec^{micro}(H,D) + Recall^{micro}(H,D)}$$
 
 ```{r microFMeasure}
 ggplot(
@@ -673,6 +734,10 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
 ### Macro-averaged
+
+The macro-averaged F-measure of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$F^{macro}(H,D) = \frac{Prec^{macro}(H,D) \times Recall^{macro}(H,D)}{Prec^{macro}(H,D) + Recall^{macro}(H,D)}$$
 
 ```{r macroFMeasure}
 ggplot(
