@@ -653,7 +653,7 @@ theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 
 ## Specificity
 
-The recall/sensibility rate is also generally associated to another performance rate: the specificity, noted 
+The recall/sensitivity rate is also generally associated to another performance rate: the specificity, noted 
 $Spec: H \times D \times l \rightarrow [0,1]$
 
 For one-label classification problems, the specificity of a classifier $H$ on a dataset $D$ is
