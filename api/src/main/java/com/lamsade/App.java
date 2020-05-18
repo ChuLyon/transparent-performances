@@ -95,9 +95,13 @@ public class App
                     "Hamming Loss", 
                     "Micro-averaged Precision",
                     "Micro-averaged Recall",
+                    "Micro-averaged Specificity",
+                    "Micro-averaged AUC",
                     "Micro-averaged F-Measure",
                     "Macro-averaged Precision",
                     "Macro-averaged Recall",
+                    "Macro-averaged Specificity",
+                    "Macro-averaged AUC",
                     "Macro-averaged F-Measure"
                 };
 			

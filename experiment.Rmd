@@ -305,13 +305,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
-labs(color="Learner")+
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
 ggtitle("Distribution of hamming losses of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r hammingLossLearnerBox}
@@ -396,13 +396,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
-labs(color="Learner")+
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
 ggtitle("Distribution of micro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microPrecisionLearnerBox}
@@ -468,13 +468,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
-labs(color="Learner")+
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
 ggtitle("Distribution of macro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroPrecisionLearnerBox}
@@ -553,13 +553,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
-labs(color="Learner")+
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
 ggtitle("Distribution of micro-averaged recalls of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microRecallLearnerBox}
@@ -624,13 +624,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
-labs(color="Learner")+
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
 ylab("Macro-averaged Recall") +
 ggtitle("Distribution of macro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroRecallLearnerBox}
@@ -647,6 +647,163 @@ ylim(0.0,1.0) +
 xlab("Learner") +
 ylab("Macro-averaged Recall") +
 ggtitle("Distribution of macro-averaged recalls by multi-label classification systems for different datasets") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+```
+
+
+## Specificity
+
+The recall/sensibility rate is also generally associated to another performance rate: the specificity, noted 
+$Spec: H \times D \times l \rightarrow [0,1]$
+
+For one-label classification problems, the specificity of a classifier $H$ on a dataset $D$ is
+defined as follow:
+
+$$Spec(H,D,l) = \frac{TNs(H,D,l)}{TNs(H,D,l) + FPs(H,D,l)}$$
+
+With $l \in L$ a label, $TNs$ the number of true negatives of classifier $H$ on a dataset $D$ for a label $l$ 
+and $FPs$ the number of false positives of classifier $H$ on a dataset $D$ for a label $l$.
+
+### Micro-averaged
+
+The micro-averaged specificity of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$Spec^{micro}(H,D) = \frac{\sum_{l \in L} TNs(H,D,l)}{\sum_{l \in L}(TNs(H,D,l) + FPs(H,D,l))}$$
+
+
+```{r microSpec}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Specificity,
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Micro.averaged_Specificity - Micro.averaged_Specificity_std,
+    ymax=Micro.averaged_Specificity + Micro.averaged_Specificity_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+ylab("Micro-averaged Specificity") +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
+ggtitle("Micro-averaged specificity of multi-label classification systems by dataset") +
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+```
+
+```{r microSpecBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Micro.averaged_Specificity
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+labs(color="Classification Systems")+
+scale_colour_manual(values = cbPalette)+
+ylim(0.0,1.0) +
+ylab("Micro-averaged Specificity") +
+ggtitle("Distribution of micro-averaged specificity of multi-label classification systems by datasets") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r microSpecLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
+    y=Micro.averaged_Specificity
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+xlab("Learner") +
+ylim(0.0,1.0) +
+ylab("Micro-averaged Specificity") +
+ggtitle("Distribution of micro-averaged specificity by multi-label classification systems for different datasets") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+```
+
+### Macro-averaged
+
+The macro-averaged specificity of a classifier $H$ on a dataset $D$ is defined as follow:
+
+$$Spec^{macro}(H,D) = \frac{\sum_{l \in L} Spec(H,D,l)}{|L|}$$
+
+```{r macroSpec}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Specificity,
+    fill=factor(Learner,levels = mostTransparent2lessTransparent)
+  )
+) + 
+geom_bar(
+  stat = "identity",
+  color = "black",
+  position = position_dodge()
+) +
+geom_errorbar(
+  aes(
+    ymin=Macro.averaged_Specificity - Macro.averaged_Specificity_std,
+    ymax=Macro.averaged_Specificity + Macro.averaged_Specificity_std
+  ),
+  width=.2,
+  position = position_dodge(.9)
+) +
+ylim(0.0,1.0) +
+labs(fill="Learner")+
+scale_fill_manual(values = cbPalette)+
+ylab("Macro-averaged Specificity") +
+ggtitle("Macro-averaged specificity of multi-label classification systems by dataset") +
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+```
+
+```{r macroSpecBox}
+ggplot(
+  results,
+  aes(
+    x=Dataset,
+    y=Macro.averaged_Specificity
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+ylim(0.0,1.0) +
+labs(color="Classification Systems")+
+scale_colour_manual(values = cbPalette)+
+ylab("Macro-averaged Specificity") +
+ggtitle("Distribution of macro-averaged specificity of multi-label classification systems by dataset") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r macroSpecLearnerBox}
+ggplot(
+  results,
+  aes(
+    x=factor(Learner,levels = lessTransparent2MostTransparent),
+    y=Macro.averaged_Recall
+  )
+) + 
+geom_boxplot() +
+geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
+ylim(0.0,1.0) +
+xlab("Learner") +
+ylab("Macro-averaged Specificity") +
+ggtitle("Distribution of macro-averaged specificity by multi-label classification systems for different datasets") +
 theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
 ```
 
