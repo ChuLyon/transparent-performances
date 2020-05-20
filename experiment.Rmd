@@ -290,10 +290,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Hamming losses of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r hammingLossBox}
@@ -328,7 +328,7 @@ xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Hamming Loss") +
 ggtitle("Distribution of hamming losses by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Precision
@@ -381,10 +381,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Micro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microPrecisionBox}
@@ -419,7 +419,7 @@ xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Precision") +
 ggtitle("Distribution of micro-averaged precisions by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ### Macro-averaged
@@ -453,10 +453,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Macro-averaged precisions of multi-label classification systems by datasets") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroPrecisionBox}
@@ -491,7 +491,7 @@ xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Macro-averaged Precision") +
 ggtitle("Distribution of macro-averaged precisions by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Recall
@@ -538,10 +538,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Micro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microRecallBox}
@@ -576,7 +576,7 @@ xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Recall") +
 ggtitle("Distribution of micro-averaged recalls by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ### Macro-averaged
@@ -608,11 +608,11 @@ geom_errorbar(
   position = position_dodge(.9)
 ) +
 ylim(0.0,1.0) +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ylab("Macro-averaged Recall") +
 ggtitle("Macro-averaged recalls of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroRecallBox}
@@ -647,7 +647,7 @@ ylim(0.0,1.0) +
 xlab("Learner") +
 ylab("Macro-averaged Recall") +
 ggtitle("Distribution of macro-averaged recalls by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
@@ -695,10 +695,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Specificity") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Micro-averaged specificity of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microSpecBox}
@@ -733,7 +733,7 @@ xlab("Learner") +
 ylim(0.0,1.0) +
 ylab("Micro-averaged Specificity") +
 ggtitle("Distribution of micro-averaged specificity by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ### Macro-averaged
@@ -765,11 +765,11 @@ geom_errorbar(
   position = position_dodge(.9)
 ) +
 ylim(0.0,1.0) +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ylab("Macro-averaged Specificity") +
 ggtitle("Macro-averaged specificity of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroSpecBox}
@@ -804,7 +804,7 @@ ylim(0.0,1.0) +
 xlab("Learner") +
 ylab("Macro-averaged Specificity") +
 ggtitle("Distribution of macro-averaged specificity by multi-label classification systems for different datasets") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## F-Measure
@@ -848,11 +848,11 @@ geom_errorbar(
   position = position_dodge(.9)
 ) +
 ylim(0.0,1.0) +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ylab("Micro-averaged F-Measure") +
 ggtitle("Micro-averaged F-Measure of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microFBox}
@@ -864,13 +864,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
 labs(color="Learner")+
 scale_colour_manual(values = cbPalette)+
 ylab("Micro-averaged F-Measure") +
 ggtitle("Distribution of micro-averaged F-measures of different multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r microFLearnerBox}
@@ -884,10 +884,10 @@ ggplot(
 geom_boxplot() +
 geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=Dataset)) +
 ylim(0.0,1.0) +
-xlab("Learner") +
+xlab("Classification Systems") +
 ylab("Micro-averaged F-Measure") +
 ggtitle("Distribution of micro-averaged F-measures by multi-label classification systems for different dataset") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ### Macro-averaged
@@ -920,10 +920,10 @@ geom_errorbar(
 ) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
-labs(fill="Learner")+
+labs(fill="Classification Systems")+
 scale_fill_manual(values = cbPalette)+
 ggtitle("Macro-averaged F-Measure of multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=10, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=10, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroFBox}
@@ -935,13 +935,13 @@ ggplot(
   )
 ) + 
 geom_boxplot() +
-geom_jitter(shape=15, size=2, position=position_jitter(0.2), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
+geom_jitter(shape=15, size=2, position=position_dodge(-0.9), aes(colour=factor(Learner,levels = mostTransparent2lessTransparent))) +
 ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
-labs(color="Learner")+
+labs(color="Classification Systems")+
 scale_colour_manual(values = cbPalette)+
-ggtitle("Distribution of macro-averaged F-measures of different multi-label classification systems by dataset") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+#ggtitle("Distribution of macro-averaged F-measures of different multi-label classification systems by dataset") +
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ```{r macroFLearnerBox}
@@ -958,7 +958,7 @@ ylim(0.0,1.0) +
 ylab("Macro-averaged F-Measure") +
 xlab("Learner") + 
 ggtitle("Distribution of macro-averaged F-measures by multi-label classification systems for different dataset") +
-theme(plot.title = element_text(size=9, face="bold", hjust=0.5))
+theme(plot.title = element_text(size=9, face="bold", hjust=0.5), axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 # References
